@@ -12,7 +12,7 @@ import {
   type TierBadge,
 } from "@/docs/docsNav";
 import { cn } from "@/lib/utils";
-import { APP_SIGNUP_URL } from "@/config/appUrls";
+import { APP_DOCS_URL, APP_SIGNUP_URL } from "@/config/appUrls";
 
 const TIER_KEY: { tier: TierBadge; label: string }[] = [
   { tier: "free", label: "Free" },
@@ -66,6 +66,14 @@ export function DocsLayout() {
               </Link>
               <a href={APP_SIGNUP_URL} className="btn-secondary text-sm">
                 Get Started Free
+              </a>
+              <a
+                href={APP_DOCS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary text-sm"
+              >
+                Detailed Docs
               </a>
             </div>
           </div>

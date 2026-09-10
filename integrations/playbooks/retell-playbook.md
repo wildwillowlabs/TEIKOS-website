@@ -145,7 +145,7 @@ Retell may turn this JSON into a **string** before the LLM sees it (and may cap 
 5. **`appointment_hold`** — Same **`service_id`**, exact **`slot_id`**, and **`caller_phone`**.
 6. **`appointment_confirm`** — Use **`hold_token`** from the hold **`data`**.
 
-Holds last about **three minutes**.
+Holds last about **90 seconds**.
 
 **Reschedule:** call **`availability_check`** again, then **`appointment_reschedule`** with **`appointment_id`** and **`new_slot_id`** from a new window.
 

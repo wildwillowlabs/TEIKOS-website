@@ -59,7 +59,7 @@ const TOOLS = [
     name: "appointment_hold",
     rpc: "appointment_hold_v1",
     description:
-      "Place a 3-minute hold on a specific time slot. Prefer slot_id copied from a window returned by availability_check (simplest for voice agents). Alternatively start_date + start_time_local in business TZ, or start_time as a full ISO instant. On success, data includes hold_token, timezone, speakable_time, speakable_end. Call appointment_confirm within 3 minutes.",
+      "Place a 90-second hold on a specific time slot. Prefer slot_id copied from a window returned by availability_check (simplest for voice agents). Alternatively start_date + start_time_local in business TZ, or start_time as a full ISO instant. On success, data includes hold_token, timezone, speakable_time, speakable_end. Call appointment_confirm within 90 seconds.",
     parameters: [
       { name: "service_id", type: "uuid", required: true, description: "The service being booked" },
       {
@@ -234,7 +234,7 @@ export function DocsSectionContent({ sectionId }: { sectionId: string }) {
                     </P>
                     <P>
                       Every availability check is computed in real-time from work hours, time off, and existing appointments — nothing is cached or stored.
-                      Every booking follows a strict hold-then-confirm state machine: the slot is locked for 3 minutes while the caller decides,
+                      Every booking follows a strict hold-then-confirm state machine: the slot is locked for 90 seconds while the caller decides,
                       and confirmation re-verifies availability inside a database transaction.
                       Two agents racing for the same slot? One wins, one gets a clean rejection. No double-books. No phantom confirmations. No hallucinated times.
                     </P>
@@ -640,7 +640,7 @@ export function DocsSectionContent({ sectionId }: { sectionId: string }) {
                         <strong>The what</strong> — For agencies, pick which <strong>linked business</strong> the run targets (or open Agent Lab from <strong>Agency hub</strong> so the client is pre-selected). Choose <strong>service</strong>, adjust <strong>duration</strong> slider, toggle <strong>buffer</strong> minutes.
                       </li>
                       <li>
-                        <strong>The action</strong> — <strong>Hold TTL display</strong> slider is a <em>label hint only</em>; real holds still expire on the server on a short clock (about three minutes). <strong>Replay hold</strong> resends the same idempotency key in <strong>live</strong> mode to prove retries are safe.
+                        <strong>The action</strong> — <strong>Hold TTL display</strong> slider is a <em>label hint only</em>; real holds still expire on the server on a short clock (about 90 seconds). <strong>Replay hold</strong> resends the same idempotency key in <strong>live</strong> mode to prove retries are safe.
                       </li>
                       <li>
                         <strong>The brain</strong> — Filter facts by category; <strong>Injected fact</strong> is preview-only and is <strong>not saved</strong> to the business — it appears in the inspector merge preview so you can role-play wording.
@@ -1131,7 +1131,7 @@ export function DocsSectionContent({ sectionId }: { sectionId: string }) {
 
                     <SubHeading>Hold expired before confirm</SubHeading>
                     <P>
-                      Holds last 3 minutes. If <code className="text-xs bg-muted px-1 rounded">appointment_confirm</code> is called after expiry, it will return NOT_FOUND.
+                      Holds last 90 seconds. If <code className="text-xs bg-muted px-1 rounded">appointment_confirm</code> is called after expiry, it will return NOT_FOUND.
                       The agent should hold and confirm quickly -- ideally within the same conversation turn.
                     </P>
 

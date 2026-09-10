@@ -13,7 +13,7 @@ TEIKOS (https://www.teikos.io) is infrastructure-grade scheduling for AI voice a
 
 1. business_facts_get — agent loads business context (hours, services, timezone, custom facts)
 2. availability_check — real-time slot computation (never cached)
-3. appointment_hold — 3-minute atomic lock on a slot
+3. appointment_hold — 90-second atomic lock on a slot
 4. appointment_confirm — database transaction re-verifies and commits booking
 
 Additional tools: caller_intake, appointment_cancel, appointment_reschedule, voice_log_create.

@@ -22,7 +22,7 @@ const steps = [
     number: 3,
     icon: Lock,
     title: 'appointment_hold',
-    description: 'Atomic 3-minute lock on the chosen slot',
+    description: 'Atomic 90-second lock on the chosen slot',
     color: 'teikos-coral',
   },
   {

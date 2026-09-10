@@ -14,8 +14,8 @@ const faqItems = [
     answer: 'Traditional scheduling tools were built for human booking. TEIKOS was built from the ground up for voice AI agents. Our atomic Hold → Confirm state machine ensures zero double-bookings, even with concurrent callers. We don\'t just check availability — we lock slots atomically until confirmation.',
   },
   {
-    question: 'How does the 3-minute hold window work?',
-    answer: 'When a voice agent requests a slot, TEIKOS places an atomic lock on that slot for 3 minutes. If the caller confirms within that window, the booking is committed. If not, the slot is released. No other caller can book that slot during the hold, eliminating race conditions entirely.',
+    question: 'How does the 90-second hold window work?',
+    answer: 'When a voice agent requests a slot, TEIKOS places an atomic lock on that slot for 90 seconds. If the caller confirms within that window, the booking is committed. If not, the slot is released. No other caller can book that slot during the hold, eliminating race conditions entirely.',
   },
   {
     question: 'Can I use TEIKOS with my existing voice agent platform?',

@@ -165,7 +165,7 @@ Scheduling success payloads often include **`timezone`**, **`speakable_time`**, 
 5. Call **`appointment_hold`** with **`slot_id`** from the chosen window.
 6. Call **`appointment_confirm`** with **`hold_token`** from the hold response.
 
-Holds expire in about **three minutes** — confirm soon.
+Holds expire in about **90 seconds** — confirm soon.
 
 ---
 

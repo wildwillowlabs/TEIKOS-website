@@ -55,7 +55,7 @@
     "type": "function",
     "function": {
       "name": "appointment_hold",
-      "description": "Hold a slot for 3 minutes. Pass slot_id from the chosen availability window and the same service_id. Then call appointment_confirm with hold_token.",
+      "description": "Hold a slot for 90 seconds. Pass slot_id from the chosen availability window and the same service_id. Then call appointment_confirm with hold_token.",
       "parameters": {
         "type": "object",
         "properties": {

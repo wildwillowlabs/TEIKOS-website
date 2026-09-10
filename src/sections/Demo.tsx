@@ -47,7 +47,7 @@ function getDemoResponseJson(activeStep: number): string {
       return envelope('appointment_hold', {
         status: 'held',
         slot: DEMO_HOLD_SLOT,
-        hold_expires: '2024-01-15T14:03:00Z',
+        hold_expires: '2024-01-15T14:01:30Z',
       });
     case 3:
       return envelope('appointment_confirm', {
