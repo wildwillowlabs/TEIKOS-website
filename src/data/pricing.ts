@@ -1,31 +1,22 @@
 /**
  * Landing-page pricing copy — mirrors TEIKOS app / Stripe product definitions.
- *
- * `AGENCY_SEAT_TIERS` unit amounts are editable placeholders: set them to match your
- * Stripe graduated per-seat product tiers (Dashboard → Products → relevant price).
  */
 
 export type BillingCycle = 'monthly' | 'yearly';
 
-/** Per-seat graduated bands for managed clients above the Agency plan inclusion (5). */
-export interface AgencySeatTierRow {
-  /** Inclusive seat index range for billable clients (6 = first seat above included 5). */
-  seatRangeLabel: string;
-  /** Price for each additional seat in this band (USD / month). */
-  pricePerSeatMonthly: string;
-}
-
 export const AGENCY_INCLUDED_CLIENTS = 5;
 
-/**
- * Graduated per-seat pricing after included Agency clients.
- * Replace amounts with your live Stripe tier unit amounts.
- */
-export const AGENCY_SEAT_TIERS: AgencySeatTierRow[] = [
-  { seatRangeLabel: '6th–10th managed client', pricePerSeatMonthly: '$20' },
-  { seatRangeLabel: '11th–15th managed client', pricePerSeatMonthly: '$15' },
-  { seatRangeLabel: '16th+ managed client', pricePerSeatMonthly: '$10' },
-];
+/** Flat per-seat pricing for managed clients beyond the Agency plan inclusion (5). */
+export const AGENCY_SEAT_PRICE = {
+  monthly: {
+    priceLine: '$20',
+    subPriceLine: 'per seat / month',
+  },
+  yearly: {
+    priceLine: '$200',
+    subPriceLine: 'per seat / year',
+  },
+} as const;
 
 export interface PlanColumn {
   id: 'free' | 'pro' | 'agency';

@@ -5,7 +5,7 @@ import { APP_LOGIN_URL, APP_SIGNUP_URL } from '@/config/appUrls';
 import {
   AGENCY_INCLUDED_CLIENTS,
   AGENCY_PLAN,
-  AGENCY_SEAT_TIERS,
+  AGENCY_SEAT_PRICE,
   FREE_PLAN,
   PRO_PLAN,
   type BillingCycle,
@@ -110,7 +110,15 @@ function PlanCard({
   );
 }
 
-function AgencySeatsColumn({ className = '' }: { className?: string }) {
+function AgencySeatsColumn({
+  cycle,
+  className = '',
+}: {
+  cycle: BillingCycle;
+  className?: string;
+}) {
+  const pack = AGENCY_SEAT_PRICE[cycle];
+
   return (
     <div className={`${pricingCardClass} ${className} bg-white`}>
       <span className="mb-3 inline-block w-fit rounded-full border-[2px] border-teikos-coral bg-teikos-coral/15 px-3 py-1 font-body text-xs font-semibold text-teikos-coral-deep">
@@ -121,41 +129,42 @@ function AgencySeatsColumn({ className = '' }: { className?: string }) {
         <img src="/images/logo-cube.png" alt="" className="h-12 w-12 shrink-0 object-contain" width={48} height={48} />
         <div>
           <h3 className="font-heading text-lg font-bold text-dark sm:text-xl">Add client seats</h3>
-          <p className="mt-1 font-body text-sm text-dark/75">
-            Graduated per-seat pricing for managed clients beyond the ({AGENCY_INCLUDED_CLIENTS}) included with Agency.
-            Each row is the rate per additional seat in that band.
-          </p>
         </div>
       </div>
 
-      <div className="mt-4 overflow-hidden rounded-lg border-[2px] border-dark bg-white">
-        <table className="w-full border-collapse text-left font-body text-sm">
-          <thead>
-            <tr className="border-b-2 border-dark bg-teikos-yellow/40">
-              <th className="px-3 py-2.5 font-semibold text-dark">Seat tier</th>
-              <th className="px-3 py-2.5 font-semibold text-dark">Per seat / mo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {AGENCY_SEAT_TIERS.map((row) => (
-              <tr key={row.seatRangeLabel} className="border-b border-dark/15 last:border-b-0">
-                <td className="px-3 py-2.5 text-dark/85">{row.seatRangeLabel}</td>
-                <td className="px-3 py-2.5 font-semibold text-dark">{row.pricePerSeatMonthly}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className={planDescriptionSlotClass}>
+        <p className="font-body text-sm leading-relaxed text-dark/75">
+          Flat per-seat pricing for managed clients beyond the ({AGENCY_INCLUDED_CLIENTS}) included with Agency.
+          Same rate for every additional seat — no volume tiers.
+        </p>
       </div>
 
-      <p className="mt-4 font-body text-xs leading-relaxed text-dark/60">
-        Eligibility and exact totals are confirmed in TEIKOS billing. Seat add-ons are billed monthly in USD.
+      <div className="mt-6 border-t-2 border-dashed border-dark/20 pt-6">
+        {cycle === 'yearly' ? (
+          <div className="mb-3 flex justify-center">
+            <span className="inline-block w-fit rounded-full border-[2px] border-teikos-coral bg-teikos-coral/15 px-3 py-1 font-body text-xs font-semibold text-teikos-coral-deep">
+              2 months free
+            </span>
+          </div>
+        ) : null}
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span className="font-heading text-4xl font-bold tracking-tight text-dark">{pack.priceLine}</span>
+          <span className="font-body text-sm font-medium text-dark/65">{pack.subPriceLine}</span>
+        </div>
+        <p className="mt-2 font-body text-xs text-dark/55">
+          {cycle === 'monthly'
+            ? 'Or $200 per seat / year when billed annually.'
+            : 'Or $20 per seat / month when billed monthly.'}
+        </p>
+      </div>
+
+      <a href={paidPlanHref()} className="btn-coral mt-6 block w-full text-center">
+        Manage seats in TEIKOS
+      </a>
+
+      <p className="mt-3 text-center font-body text-xs text-dark/55">
+        Eligibility and exact totals are confirmed in TEIKOS billing. Seat add-ons are billed in USD.
       </p>
-
-      <div className="mt-auto pt-6 w-full">
-        <a href={paidPlanHref()} className="btn-coral block w-full text-center">
-          Manage seats in TEIKOS
-        </a>
-      </div>
     </div>
   );
 }
@@ -210,7 +219,7 @@ export function Pricing() {
             <PlanCard plan={FREE_PLAN} cycle={cycle} className="order-1" />
             <PlanCard plan={PRO_PLAN} cycle={cycle} className="order-2" />
             <PlanCard plan={AGENCY_PLAN} cycle={cycle} className="order-3" />
-            <AgencySeatsColumn className="order-4" />
+            <AgencySeatsColumn cycle={cycle} className="order-4" />
           </div>
         </ScrollReveal>
 

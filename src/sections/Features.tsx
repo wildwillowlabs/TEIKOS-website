@@ -188,10 +188,17 @@ export function Features() {
 
         {/* Tab Indicator */}
         <ScrollReveal className="mt-12 text-center" delay={0.3}>
-          <p className="font-body text-sm font-semibold text-teikos-coral">
-            {activeTab === 'business' 
-              ? 'Free for individual business owners. Upgrade to Pro for integrations.'
-              : 'Agency tier includes all Pro features plus multi-client management.'}
+          <p className="font-body text-base font-semibold">
+            {activeTab === 'business' ? (
+              <>
+                <span className="text-dark">Free for individual business owners.</span>{' '}
+                <span className="text-teikos-coral">Upgrade to Pro for integrations.</span>
+              </>
+            ) : (
+              <span className="text-teikos-coral">
+                Agency tier includes all Pro features plus multi-client management.
+              </span>
+            )}
           </p>
         </ScrollReveal>
       </div>

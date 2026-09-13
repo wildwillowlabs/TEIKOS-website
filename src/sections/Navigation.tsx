@@ -7,6 +7,8 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { APP_LOGIN_URL, APP_SIGNUP_URL } from '@/config/appUrls';
 import { dispatchFeaturesTab, scrollToHash } from '@/lib/scrollToSection';
 
+const MotionLink = motion.create(Link);
+
 type NavLink = {
   label: string;
   href: string;
@@ -93,13 +95,20 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) =>
               link.isRoute ? (
-                <Link
+                <MotionLink
                   key={link.label}
                   to={link.href}
                   className="relative font-body text-sm font-medium text-dark hover:text-dark/80 transition-colors"
+                  whileHover="hover"
                 >
                   {link.label}
-                </Link>
+                  <motion.span
+                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-teikos-blue origin-left"
+                    initial={{ scaleX: 0 }}
+                    variants={{ hover: { scaleX: 1 } }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                  />
+                </MotionLink>
               ) : (
                 <motion.a
                   key={link.label}
